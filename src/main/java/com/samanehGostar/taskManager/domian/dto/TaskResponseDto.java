@@ -1,26 +1,21 @@
-package com.samanehGostar.taskManager.domian.entities;
+package com.samanehGostar.taskManager.domian.dto;
 
+import com.samanehGostar.taskManager.domian.entities.Task;
+import com.samanehGostar.taskManager.domian.entities.User;
 import com.samanehGostar.taskManager.domian.enumeration.Priority;
 import com.samanehGostar.taskManager.domian.enumeration.State;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
-import javax.print.attribute.standard.DateTimeAtCreation;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
-
-@Entity
-@Getter
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Task {
-    @Id
+public class TaskResponseDto {
     private Long id;
     private String name;
     private Long taskNumber;
@@ -29,12 +24,7 @@ public class Task {
     private LocalDateTime createDate;
     private LocalDateTime deadLineTime;
     private LocalDateTime completeDate;
-    @ManyToOne
-    private User createdUser;
-    @ManyToOne
-    private User assignedUser;
-    @OneToMany
-    private Set<Task> subTask;
-    // TODO: 12/27/2023  override equal & hashcode
-
+    private UserResponseDto createdUser;
+    private UserResponseDto assignedUser;
+    private Set<TaskResponseDto> subTask;
 }
