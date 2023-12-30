@@ -12,7 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +46,12 @@ public class ProjectService {
              return  mapToProjectResponseDto(project.get());
 
     }
-
+    public List<ProjectResponseDto> getAllProjects(){
+        List<Project> allProjects = projectRepository.findAll();
+       return   allProjects.stream()
+                .map(this::mapToProjectResponseDto)
+                .collect(Collectors.toList());
+    }
     private ProjectResponseDto mapToProjectResponseDto(Project project) {
         return ProjectResponseDto.builder()
                 .name(project.getName())
